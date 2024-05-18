@@ -10,15 +10,19 @@ python -m pip install jupyter-matlab-proxy
 ```
 
 ## Exercise 1
-[Jupyter NB 1](U1/U1.ipynb)
+
+* [Jupyter NB 1](U1/U1.ipynb)
 
 ## Exercise 2
-[Jupyter NB 2](U2/U2.ipynb)
+
+* [Jupyter NB 2](U2/U2.ipynb)
 
 ## Exercise 3
-[Jupyter NB 3](U3/U3.ipynb)
-[MatLab Script 3](U3/U3.m)
+
+* [Jupyter NB 3](U3/U3.ipynb)
+* [MatLab Script 3](U3/U3.m)
 
 ## Exercise 4
-[Jupyter NB 4](U4/U4.ipynb)
-[MatLab Script 4](U4/U4.m)
+
+* [Jupyter NB 4](U4/U4.ipynb)
+* [MatLab Script 4](U4/U4.m)

@@ -1,2 +1,5 @@
-*.pdf
 */.ipynb_checkpoints/
+klausur*
+MphS*
+Termin*
+Loesung*

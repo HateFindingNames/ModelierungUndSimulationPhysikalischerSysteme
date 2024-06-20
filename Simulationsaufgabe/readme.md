@@ -2,17 +2,17 @@
 
 Das zu modellierende physikalische System besteht aus zwei über eine Spiralfeder miteinander gekoppelte Torsionspendel, die auf einer gemeinsamen Achse sitzen. Beide Pendel sind in allen ihren Parametern (Trägheitsmoment, Federkonstante der Rückstellfeder, Reibungskoeffizient) identisch.
 Das System soll sowohl freie wie auch erzwungene Schwingungen variabler Frequenz ausführen können, wobei die äußere Erregung nur an einem Rad angreift. Das System lässt sich z.B. durch zwei gekoppelte, auf einer Achse laufenden POHL‘schen Rädern realisieren, wobei nur eines mit dem Antrieb versehen ist.
-Die Modellierung der Bewegung des Systems soll mit folgenden Parametern auskommen: Trägheitsmoment $J$, Torsionsfederkonstante der beiden Rückstellfedern $D^*$, Torsionsfederkonstante der Kopplungsfeder $DD^*$, Dämpfungskoeffizient $b^*$.
+Die Modellierung der Bewegung des Systems soll mit folgenden Parametern auskommen: Trägheitsmoment $J$, Torsionsfederkonstante der beiden Rückstellfedern $D^\ast$, Torsionsfederkonstante der Kopplungsfeder $DD^\ast$, Dämpfungskoeffizient $b^\ast$.
 Die Auslenkung der Schwinger wird durch je einen Winkel $\varphi_1(t)$ und $\varphi_2(t)$ beschrieben.
 Die für eine erzwungene Schwingung erforderliche Anregungsschwingung αE(t) sei gegeben mit der Funktion:
-$$\alpha_E(t) = \head{\alpha}_E\,sin(\omega_E\,t)$$
+$$\alpha_E(t) = \hat{\alpha}_E\,sin(\omega_E\,t)$$
 Zudem müssen Anfangsbedingungen (AB) $\varphi_1(0)$ und $\dot{\varphi}_1(0)$ sowie $\varphi_1(0)$ und $\dot{\varphi}_1(0)$ vorgegeben werden.
 Für Modellrechnungen können folgende Parameterwerte verwendet werden:
 * $J = 10$ kg m^2,
-* $D^* = 0.1$ Nm,
-* $DD^* = 0.01$ Nm,
-* $b^* = 0.2$ Nms,
-* $\head{\alpha}_E = 50$.
+* $D^\ast = 0.1$ Nm,
+* $DD^\ast = 0.01$ Nm,
+* $b^\ast = 0.2$ Nms,
+* $\hat{\alpha}_E = 50$.
 
 ## Aufgabenstellung
 

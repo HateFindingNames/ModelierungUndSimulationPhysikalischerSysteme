@@ -5,13 +5,15 @@ Das System soll sowohl freie wie auch erzwungene Schwingungen variabler Frequenz
 Die Modellierung der Bewegung des Systems soll mit folgenden Parametern auskommen: Trägheitsmoment $J$, Torsionsfederkonstante der beiden Rückstellfedern $D^\ast$, Torsionsfederkonstante der Kopplungsfeder $DD^\ast$, Dämpfungskoeffizient $b^\ast$.
 Die Auslenkung der Schwinger wird durch je einen Winkel $\varphi_1(t)$ und $\varphi_2(t)$ beschrieben.
 Die für eine erzwungene Schwingung erforderliche Anregungsschwingung αE(t) sei gegeben mit der Funktion:
-$$\alpha_E(t) = \hat{\alpha}_E\,sin(\omega_E\,t)$$
+
+$$ \alpha_e(t) = \hat{\alpha}_e \sin(\omega_e t) $$
+
 Zudem müssen Anfangsbedingungen (AB) $\varphi_1(0)$ und $\dot{\varphi}_1(0)$ sowie $\varphi_1(0)$ und $\dot{\varphi}_1(0)$ vorgegeben werden.
 Für Modellrechnungen können folgende Parameterwerte verwendet werden:
-* $J = 10$ kg m^2,
-* $D^\ast = 0.1$ Nm,
-* $DD^\ast = 0.01$ Nm,
-* $b^\ast = 0.2$ Nms,
+* $J = 10$ kg m²,
+* $D^\ast = 0.1$ N m,
+* $DD^\ast = 0.01$ N m,
+* $b^\ast = 0.2$ Nm s,
 * $\hat{\alpha}_E = 50$.
 
 ## Aufgabenstellung
@@ -62,3 +64,129 @@ Die Lage des Startpunktes soll im Diagramm ersichtlich sein.
 2. verwendete Formeln aus der Vorlesung sollten im Theorieteil aufgeführt und kurz kommentiert werden,
 3. im Bericht sollte kein Quellcode des Programms erscheinen
 4. der Bericht sollte die Diskussion der wichtigsten Fälle enthalten
+
+# Glossar
+
+| Formelzeichen | Bedeutung | Einheit |
+| ----- | --------- | ----- |
+| $\alpha$ | Auslenkungswinkel Erreger | 1 |
+| $\hat{M}_e$ | Externeds Drehmoment | N m |
+| $\varphi(t)$ | Auslenkungswinkel Rad | 1 |
+| $b^\ast$ | Dämpfung (Wirbelstrombremse) | |
+| $D^\ast$ | (Torsions)federkonstante | N m |
+| $DD^\ast$ | | |
+| $J$ | Trägheitsmoment | kg m²|
+| $\omega_e$ | Erregerfrequenz | 1/s |
+| $\omega_0$ | Resonanzfrequenz des Rads | 1/s |
+| $\omega_R$ | | 1/s |
+| $\xi$ | | |
+| $\delta$ | | |
+
+# Theorie erzwungener harmonischer Schwingung
+
+## DGL 2. Ordnung
+
+Allgemeine Lösung = Lsg. homogen + Lsg. inhomogen
+
+$$ \varphi(t) = \hat{\varphi}_ e(\omega_ e) \sin(\omega_ e t - \underbrace{\xi(\omega_ e)}_ \mathrm{Phase}) $$
+
+**(1.11)**
+
+mit
+
+$$ \hat{\varphi}_ e(\omega_ e) = \frac{\hat{M}}{J} \frac{1}{\sqrt{(\omega_ 0^2 - \omega_ e^2)^2 + (2\delta \omega_ e^2)}} $$
+
+**(1.11a)**
+
+$$ \xi(\omega_e) = \arctan\left(\frac{2\delta\omega_e}{\omega_0^2 - \omega_e^2}\right) $$
+
+**(1.11b)**
+
+## a) Statischer Grenzfall $\omega_e \rightarrow 0, \omega_e \ll \omega_0$
+
+$$ 1.11a \quad \rightarrow \quad \hat{\varphi}_e(\omega_e \approx 0) = \frac{\hat{M}_e}{J} \frac{1}{\omega_0^2} = \frac{\hat{M}_e}{D^\ast} = \hat{\alpha}_e $$
+
+**(1.12)**
+
+$$ 1.11b \quad \rightarrow \quad \underbrace{\xi(\omega_e \approx 0) = 0}_\textrm{Keine Phasenverschiebung} $$
+
+1.11 zerlegen:
+
+$$ \begin{align*}
+\varphi(t) = \hat{\varphi}_e(\omega_e)\underbrace{\left[ \sin(\omega_e t)\cos(\xi_e) - \cos(\omega_e t)\sin(\xi_e) \right]}_\mathrm{\sin(\omega_ e t - \xi(\omega_ e))}
+\end{align*} $$
+
+wird mit
+
+$$ \begin{align*}
+\cos(\xi_e) = \frac{1}{\sqrt{1+\tan^2(\xi_e)}} = \frac{1}{\sqrt{1 + \left(\frac{2\delta \omega_e}{\omega_0^2-\omega_e^2}\right)^2}} = \frac{\omega_0^2-\omega_e^2}{\sqrt{(\omega_0^2-\omega_e^2)^2+(2\delta\omega_e)^2}}
+\end{align*} $$
+
+und
+
+$$ \begin{align*}
+\sin(\xi_e) = \frac{\tan(\xi_e)}{1+\tan^2(\xi_e)} = \dots = \frac{2\delta\omega_e}{\sqrt{(\omega_0^2-\omega_e^2)^2+(2\delta\omega_e)^2}}
+\end{align*} $$
+
+zu
+
+$$ \begin{align*}
+\varphi(t) = \frac{\hat{M}_e}{J} \left[ \frac{\omega_0^2-\omega_e^2}{\sqrt{(\omega_0^2-\omega_e^2)^2+(2\delta\omega_e)^2}} \sin(\omega_e t) - \frac{2\delta\omega_e}{\sqrt{(\omega_0^2-\omega_e^2)^2+(2\delta\omega_e)^2}}  \cos(\omega_e t) \right]
+\end{align*} $$
+
+Hier ist der erste Term der Klammer *in Phase mit $M_e$* und der zweite Term $\frac{\pi}{2}$ phasenverschoben $\rightarrow$ Energietransport!.
+
+1.12 wird zu
+
+$$ \frac{\hat{M}_e}{J} = \hat{\alpha}_e  \omega_0^2 $$
+
+$$ \begin{align*}
+\Rightarrow \qquad \ddot{\varphi} + \frac{b^\ast}{J}\dot{\varphi} + \omega_0^2 \varphi &= \omega_0^2 \overbrace{\alpha_e   \sin(\omega_e t)}^\mathrm{\alpha_e(t)}\\
+\Rightarrow\qquad \ddot{\varphi} + \frac{b^\ast}{J}\dot{\varphi} + \omega_0^2 (\varphi - \alpha_e(t)) &= 0
+\end{align*} $$
+
+## b) Hochfrequenter Grenzfall: $\omega_e \rightarrow \infty, \omega_e \gg \omega_0$
+
+$$ 1.11a \quad \rightarrow \quad \hat{\varphi}_e(\omega_e \approx \infty) \rightarrow 0 $$
+
+$$ 1.11b \quad \rightarrow \quad
+\begin{gather*}
+\begin{cases}
+\xi(\omega_e \approx \infty) \rightarrow \pi\\
+\tan(\xi(\omega_e \approx \infty)) = \frac{1}{\infty} \Rightarrow \xi = 0,\pi,2\pi,\dots
+\end{cases}
+\end{gather*} $$
+
+## c) Resonanzfall: $\omega_e \approx \omega_0 \approx \omega_R$
+
+$$ 1.11a \quad \rightarrow \quad \hat{\varphi}_e(\omega_e) = \underbrace{\omega_0^2\hat{\alpha}_e}_\mathrm{\frac{M_e}{J}} \frac{1}{2\delta\omega_0} $$
+
+Gesucht ist nun die maximale Auslenkung
+
+$$ \hat{\varphi}_e(\omega_R) \rightarrow \partial_{\omega_R} \hat{\varphi}_e=0 $$
+
+mit
+
+$$ \omega_R = \sqrt{\omega_0^2 - 2\delta^2} $$
+
+**(1.14)**
+
+$$ \hat{\varphi}_e(\omega_R) = \omega_0^2 \hat{\alpha}\left(2\delta\sqrt{\omega_0^2 - 2\delta^2}\right) $$
+
+**(1.14a)**
+
+Amplitude:
+
+$$ \hat{\varphi}(\omega_e) = \frac{\hat{M}_e}{J} \frac{1}{\underbrace{\sqrt{(\omega_0^2-\omega_e^2)^2+(2\delta\omega_e)^2}}_\mathrm{f(\omega_e)}} $$
+
+Die Amplitude $\hat{\varphi}(\omega_e)$ wird maximal wenn $f(\omega_e)$ minimal wird:
+
+$$ \Rightarrow \partial_{\omega_e} f(\omega_e) \overset{!}{=} 0 $$
+
+Mit ein bisschen :sparkles: wird das zu
+
+$$ \hat{\varphi}(\omega_e) = \omega_0^2 \hat{\alpha} \frac{1}{2\delta\sqrt{\omega_0^2-\delta^2}} $$
+
+Phasenverschiebung:
+
+$$ \xi(\omega_e \approx \omega_ 0) = \arctan\left(\frac{1}{0}\right) \rightarrow \frac{\pi}{2} $$

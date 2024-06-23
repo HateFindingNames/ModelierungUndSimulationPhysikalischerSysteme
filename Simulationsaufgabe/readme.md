@@ -69,22 +69,37 @@ Die Lage des Startpunktes soll im Diagramm ersichtlich sein.
 
 | Formelzeichen | Bedeutung | Einheit |
 | ----- | --------- | ----- |
-| $\alpha$ | Auslenkungswinkel Erreger | 1 |
+| $\alpha$ | Auslenkungswinkel Erreger | rad |
 | $\hat{M}_e$ | Externeds Drehmoment | N m |
-| $\varphi(t)$ | Auslenkungswinkel Rad | 1 |
+| $\varphi_{1,2}(t)$ | Rotorauslenkungswinkel | rad |
 | $b^\ast$ | Dämpfung (Wirbelstrombremse) | |
 | $D^\ast$ | (Torsions)federkonstante | N m |
 | $DD^\ast$ | | |
 | $J$ | Trägheitsmoment | kg m²|
-| $\omega_e$ | Erregerfrequenz | 1/s |
-| $\omega_0$ | Resonanzfrequenz des Rads | 1/s |
-| $\omega_R$ | | 1/s |
-| $\xi$ | | |
-| $\delta$ | | |
+| $\omega_e$ | Erregerfrequenz | rad/s |
+| $\omega_0$ | Resonanzfrequenz | rad/s |
+| $\omega_R$ | | rad/s |
+| $\xi$ | Phasenverschiebung | |
+| $\delta$ | Dämpfungskoeffizient |  |
 
 # Theorie erzwungener harmonischer Schwingung
 
-## DGL 2. Ordnung
+## (homogene) Bewegungsgleichung
+
+$$\ddot{\varphi} + \overbrace{\frac{b^\ast}{J}}^\mathrm{2\delta}\dot{\varphi} + \underbrace{\frac{D^\ast}{J}}_\mathrm{\omega_0^2}\varphi = \ddot{\varphi} + 2\delta\dot{\varphi} + \omega_0^2\varphi = 0$$
+
+**(1.3)**
+
+## Erzwungene harmonische Schwingung
+
+* Externes Drehmoment $M_e = \hat{M}_e\sin(\omega_e t)$
+* Auslenkung Erreger $\alpha_e(t) = \hat{\alpha}_e\sin(\omega_e t)$
+
+Bewegungsgleichung wird inhomogen:
+
+$$\ddot{\varphi} + 2\delta\dot{\varphi} + \omega_0^2\varphi = \frac{M_e}{J}\sin(\omega_e t)$$
+
+**(1.10)**
 
 Allgemeine Lösung = Lsg. homogen + Lsg. inhomogen
 
@@ -112,15 +127,11 @@ $$ 1.11b \quad \rightarrow \quad \underbrace{\xi(\omega_e \approx 0) = 0}_\textr
 
 1.11 zerlegen:
 
-$$ \begin{align*}
-\varphi(t) = \hat{\varphi}_e(\omega_e)\underbrace{\left[ \sin(\omega_e t)\cos(\xi_e) - \cos(\omega_e t)\sin(\xi_e) \right]}_\mathrm{\sin(\omega_ e t - \xi(\omega_ e))}
-\end{align*} $$
+$$ \varphi(t) = \hat{\varphi}_ e(\omega_ e)\underbrace{\left[ \sin(\omega_ e t)\cos(\xi_ e) - \cos(\omega_ e t)\sin(\xi_ e) \right]}_ \mathrm{\sin(\omega_  e t - \xi(\omega_  e))} $$
 
 wird mit
 
-$$ \begin{align*}
-\cos(\xi_e) = \frac{1}{\sqrt{1+\tan^2(\xi_e)}} = \frac{1}{\sqrt{1 + \left(\frac{2\delta \omega_e}{\omega_0^2-\omega_e^2}\right)^2}} = \frac{\omega_0^2-\omega_e^2}{\sqrt{(\omega_0^2-\omega_e^2)^2+(2\delta\omega_e)^2}}
-\end{align*} $$
+$$\cos(\xi_ e) = \frac{1}{\sqrt{1+\tan^2(\xi_ e)}} = \frac{1}{\sqrt{1 + \left(\frac{2\delta \omega_ e}{\omega_ 0^2-\omega_ e^2}\right)^2}} = \frac{\omega_ 0^2-\omega_ e^2}{\sqrt{(\omega_ 0^2-\omega_ e^2)^2+(2\delta\omega_ e)^2}}$$
 
 und
 
@@ -159,11 +170,11 @@ $$ 1.11b \quad \rightarrow \quad
 
 ## c) Resonanzfall: $\omega_e \approx \omega_0 \approx \omega_R$
 
-$$ 1.11a \quad \rightarrow \quad \hat{\varphi}_e(\omega_e) = \underbrace{\omega_0^2\hat{\alpha}_e}_\mathrm{\frac{M_e}{J}} \frac{1}{2\delta\omega_0} $$
+$$ 1.11a \quad \rightarrow \quad \hat{\varphi}_ e(\omega_e) = \underbrace{\omega_ 0^2 \hat{\alpha}_ e}_ \mathrm{\frac{M_e}{J}} \frac{1}{2\delta\omega_0} $$
 
 Gesucht ist nun die maximale Auslenkung
 
-$$ \hat{\varphi}_e(\omega_R) \rightarrow \partial_{\omega_R} \hat{\varphi}_e=0 $$
+$$\hat{\varphi}_ e(\omega_R) \rightarrow \partial_ {\omega_R} \hat{\varphi}_e=0$$
 
 mit
 
@@ -177,7 +188,7 @@ $$ \hat{\varphi}_e(\omega_R) = \omega_0^2 \hat{\alpha}\left(2\delta\sqrt{\omega_
 
 Amplitude:
 
-$$ \hat{\varphi}(\omega_e) = \frac{\hat{M}_e}{J} \frac{1}{\underbrace{\sqrt{(\omega_0^2-\omega_e^2)^2+(2\delta\omega_e)^2}}_\mathrm{f(\omega_e)}} $$
+$$\hat{\varphi}(\omega_ e) = \frac{\hat{M}_ e}{J} \frac{1}{\underbrace{\sqrt{(\omega_ 0^2 -\omega_ e^2)^2+(2\delta\omega_ e)^2}}_ \mathrm{f(\omega_ e)}}$$
 
 Die Amplitude $\hat{\varphi}(\omega_e)$ wird maximal wenn $f(\omega_e)$ minimal wird:
 
@@ -190,3 +201,64 @@ $$ \hat{\varphi}(\omega_e) = \omega_0^2 \hat{\alpha} \frac{1}{2\delta\sqrt{\omeg
 Phasenverschiebung:
 
 $$ \xi(\omega_e \approx \omega_ 0) = \arctan\left(\frac{1}{0}\right) \rightarrow \frac{\pi}{2} $$
+
+## Gekoppelte harmonische Schwingung
+
+### Bewegungsgleichungen
+
+* **(1.22a)** $\ddot{\varphi}_1 + \frac{b^\ast}{J}\dot{\varphi}_1 + \frac{D^\ast}{J}\varphi_1 + \frac{D^{\ast\ast}}{J}(\varphi_1 - \varphi_2) = \hat{M}_e\sin(\omega_e t)$
+  
+* **(1.22b)** $\ddot{\varphi}_2 + \frac{b^\ast}{J}\dot{\varphi}_2 + \frac{D^\ast}{J}\varphi_2 + \frac{D^{\ast\ast}}{J}(\varphi_2 - \varphi_1) = 0$
+
+Anfangsbedingungen:
+
+$$\begin{align*}
+    \varphi_ 1(0) = \varphi_{10} \qquad \varphi_ 2(0) = \varphi_ {20}\\
+    \dot{\varphi}_ 1(0) = \dot{\varphi}_ {10} \qquad \dot{\varphi}_ 2(0) = \dot{\varphi}_ {20}
+\end{align*}$$
+
+### Freie Schwingung
+
+* **(1.24a)** $\ddot{\varphi}_1 + \frac{b^\ast}{J}\dot{\varphi}_1 + \frac{D^\ast}{J}\varphi_1 + \frac{D^{\ast\ast}}{J}(\varphi_1 - \varphi_2) = 0$
+  
+* **(1.24b)** $\ddot{\varphi}_2 + \frac{b^\ast}{J}\dot{\varphi}_2 + \frac{D^\ast}{J}\varphi_2 + \frac{D^{\ast\ast}}{J}(\varphi_2 - \varphi_1) = 0$
+
+Gesucht $\varphi_1$ und $\varphi_2$ $\rightarrow$ neue Koords $u_a$ und $u_b$:
+
+1.24a + 1.24b
+
+$$\frac{d^2}{d^2t} \underbrace{(\varphi_1+\varphi_2)}_ \mathrm{u_a} + \overbrace{\frac{b^\ast}{J}}^ \mathrm{2\delta}\frac{d}{dt}\underbrace{(\varphi_1+\varphi_2)}_ \mathrm{u_a} + \overbrace{\frac{D^\ast}{J}}^ \mathrm{\omega_ a^2}\underbrace{(\varphi_1+\varphi_2)}_ \mathrm{u_a} = 0$$
+
+**(1.25)**
+
+1.24a - 1.24b
+
+$$\frac{d^2}{d^2 t} \underbrace{(\varphi_1 - \varphi_2)}_ \mathrm{u_b} + \overbrace{\frac{b^ \ast}{J}}^ \mathrm{2\delta} \frac{d}{dt} \underbrace{(\varphi_1 - \varphi_2)}_ \mathrm{u_b} + \frac{D^ \ast}{J}\underbrace{(\varphi_1 - \varphi_2)}_ \mathrm{u_b} + \frac{D^ {\ast \ast}}{J}2 \underbrace{(\varphi_1 - \varphi_2)}_ \mathrm{u_ b}= 0$$
+
+mit $\omega_b^2 = \frac{D^\ast + D^{\ast \ast}}{J}$
+
+**(1.26)**
+
+* **(1.25a)** $\ddot{u}_a + 2\delta\dot{u}_a + \omega_a^2 u_a = 0$
+
+* **(1.25b)** $\ddot{u}_b + 2\delta\dot{u}_b + \omega_a^2 u_b = 0$
+
+Für $\delta = 0$ und $\dot{u}_ {a,0} = \dot{u}_ {b,0} = 0$:
+
+* **(1.27a)** $u_a(t) = u_{a,0}\cos(\omega_a t)$
+
+* **(1.27b)** $u_b(t) = u_{b,0}\cos(\omega_b t)$
+
+$$\begin{align*}
+\Rightarrow \varphi_1(t) = \frac{1}{2}(u_a + u_b) = \frac{1}{2}(\varphi_{10} + \varphi_{20})\cos(\omega_a t) + \frac{1}{2}(\varphi_{10} - \varphi_{20})\cos(\omega_b t)\\
+\Rightarrow \varphi_2(t) = \frac{1}{2}(u_a - u_b) = \frac{1}{2}(\varphi_{10} + \varphi_{20})\cos(\omega_a t) - \frac{1}{2}(\varphi_{10} - \varphi_{20})\cos(\omega_b t)
+\end{align*}$$
+
+**(1.28a), (1.28b)**
+
+* Für $\varphi_{10} = \varphi_{20}$
+  *  $\varphi_1(t)=\varphi_2(t) = \varphi_{10}\cos(\omega_a t)$
+* Für $\varphi_{10} = -\varphi_{20}$
+  * $\varphi_1(t) = \varphi_{10}\cos(\omega_b t)$
+  * $\varphi_2(t) = -\varphi_{10}\cos(\omega_b t)$
+* Für sonst werden beide Normalschwingungen angeregt. Beispiel 

@@ -137,7 +137,7 @@ und
 
 $$ \begin{align*}
 \sin(\xi_e) = \frac{\tan(\xi_e)}{1+\tan^2(\xi_e)} = \dots = \frac{2\delta\omega_e}{\sqrt{(\omega_0^2-\omega_e^2)^2+(2\delta\omega_e)^2}}
-\end{align*} $$
+\end{align*} $$****
 
 zu
 

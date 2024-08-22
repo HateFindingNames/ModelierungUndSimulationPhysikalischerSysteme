@@ -1,0 +1,202 @@
+\chapter{Theorie}
+    \nomenclature[G]{\(\varphi_e\)}{Auslenkung des Schwingers bei ext. Err.\nomunit{1}}
+    \nomenclature[L]{\(g\)}{Erdbeschleunigung\nomunit{\metre\per\second\squared}}
+    Im folgenden Abschnitt werden die nötigen theoretischen Grundlagen zur Beschreibung des Systems dargestellt, die gleichzeitig die mathematische Basis für das Erstellen des \textsc{MATLAB}-Programms bilden.
+
+    \section{Mathematische Grundlagen}
+
+        Die homogene, harmonische Bewegungsgleichung lautet:
+        \begin{equation}
+            \ddot{\varphi} + \overbrace{\frac{b^\ast}{J}}^{2\delta}\dot{\varphi} + \underbrace{\frac{D^\ast}{J}}_{\omega_0^2}\varphi = \ddot{\varphi} + 2\delta\dot{\varphi} + \omega_0^2\varphi = 0
+            \tag{1.3}\label{eq:1.3}
+        \end{equation}
+
+        Ist die Schwingung erzwungen, so wird \cref{eq:1.3} inhomogen mit dem Störterm \(\frac{M_e}{J}\sin(\omega_e t)\).
+        Hierbei ist \(M_e = \hat{M}_e\sin(\omega_e t)\) das externe Drehmoment mit der Auslenkung \(\alpha_e(t) = \hat{\alpha}_e\sin(\omega_e t) \) des externen Erregers.
+
+        Wir erhalten:
+        \begin{equation}
+            \ddot{\varphi} + 2\delta\dot{\varphi} + \omega_0^2\varphi = \frac{M_e}{J}\sin(\omega_e t)\label{eq:1.10}
+            % \tag{1.10}
+        \end{equation}
+
+        Die allgemeine Lösung setzt sich aus der Summe der homogen und inhomogen Lösung zusammen: 
+        \begin{equation}
+            \varphi(t) = \hat{\varphi}_e(\omega_e) \sin(\omega_e t - \underbrace{\xi(\omega_e)}_{\text{Phase}})\label{eq:1.11}
+            % \tag{1.11}
+        \end{equation}
+
+        mit
+        \begin{equation}
+            \hat{\varphi}_e(\omega_e) = \frac{\hat{M_e}}{J} \frac{1}{\sqrt{(\omega_0^2 - \omega_e^2)^2 + (2\delta \omega_e)^2}}\label{eq:1.11a}
+            % \tag{1.11a}
+        \end{equation}
+
+        \begin{equation}
+            \xi(\omega_e) = \arctan\left(\frac{2\delta\omega_e}{\omega_0^2 - \omega_e^2}\right)\label{eq:1.11b}
+            % \tag{1.11b}
+        \end{equation}
+
+    \section{Statischer Grenzfall \(\omega_e \rightarrow 0, \quad \omega_e \ll \omega_0\)}
+    
+        \begin{align}
+            \cref{eq:1.11a} \quad &\Rightarrow \quad \hat{\varphi}_e(\omega_e \approx 0) = \frac{\hat{M}_e}{J} \frac{1}{\omega_0^2} = \frac{\hat{M}_e}{D^\ast} = \hat{\alpha}_e\label{eq:1.12}\\
+            \cref{eq:1.11b} \quad &\Rightarrow \quad \underbrace{\xi(\omega_e \approx 0) = 0}_{\text{Keine Phasenverschiebung}}
+            % \tag{1.12}
+        \end{align}
+
+        \Cref{eq:1.11} zerlegen:
+        \begin{align}
+            \varphi(t) = \hat{\varphi}_e(\omega_e) \underbrace{\left[ \sin(\omega_e t)\cos(\xi_e) - \cos(\omega_e t)\sin(\xi_e) \right]}_{\sin(\omega_e t - \xi(\omega_e))}\nonumber
+        \end{align}
+
+        wird mit
+        \begin{align}
+            \cos(\xi_e) = \frac{1}{\sqrt{1+\tan^2(\xi_e)}} = \frac{1}{\sqrt{1 + \left(\frac{2\delta \omega_e}{\omega_0^2-\omega_e^2}\right)^2}} = \frac{\omega_0^2-\omega_e^2}{\sqrt{(\omega_0^2-\omega_e^2)^2+(2\delta\omega_e)^2}}\nonumber
+        \end{align}
+
+        und
+        \begin{align}
+            \sin(\xi_e) = \frac{\tan(\xi_e)}{1+\tan^2(\xi_e)} = \dots = \frac{2\delta\omega_e}{\sqrt{(\omega_0^2-\omega_e^2)^2+(2\delta\omega_e)^2}}\nonumber
+        \end{align}
+
+        zu
+        \begin{align}
+            \varphi(t) = \frac{\hat{M}_e}{J} \left[ \frac{\omega_0^2-\omega_e^2}{\sqrt{(\omega_0^2-\omega_e^2)^2+(2\delta\omega_e)^2}} \sin(\omega_e t) - \frac{2\delta\omega_e}{\sqrt{(\omega_0^2-\omega_e^2)^2+(2\delta\omega_e)^2}} \cos(\omega_e t) \right]\nonumber
+        \end{align}
+
+        Hier ist der erste Term der Klammer \textit{in Phase} \(M_e\) und der zweite Term um \(\frac{\pi}{2}\) phasenverschoben was letztlich die Bedingung für Energietransport ist.\par\medskip
+
+        \Cref{eq:1.12} wird zu
+        \begin{align}
+            \frac{\hat{M}_e}{J} = \hat{\alpha}_e \omega_0^2\nonumber
+        \end{align}
+        und liefert mit \cref{eq:1.3}
+        \begin{align}
+            \ddot{\varphi} + \frac{b^\ast}{J}\dot{\varphi} + \omega_0^2 \varphi = \omega_0^2 \overbrace{\alpha_e \sin(\omega_e t)}^{\alpha_e(t)} \qquad \rightarrow \qquad \ddot{\varphi} + \frac{b^\ast}{J}\dot{\varphi} + \omega_0^2 (\varphi - \alpha_e(t)) = 0\nonumber
+        \end{align}
+
+    \section{Hochfrequenter Grenzfall: \(\omega_e \rightarrow \infty, \quad \omega_e \gg \omega_0\)}
+
+        \begin{align}
+            \cref{eq:1.11a} \quad &\Rightarrow \quad \hat{\varphi}_e(\omega_e \approx \infty) \rightarrow 0\nonumber\\
+            \cref{eq:1.11b} \quad &\Rightarrow \quad
+            \begin{cases}
+            \xi(\omega_e \approx \infty) \rightarrow \pi\\
+            \tan(\xi(\omega_e \approx \infty)) = \frac{1}{\infty} \Rightarrow \xi = 0,\pi,2\pi,\dots
+            \end{cases}\nonumber
+        \end{align}
+
+    \section{Resonanzfall: \(\omega_e \approx \omega_0 \approx \omega_R \)}
+
+        \begin{align}
+            \cref{eq:1.11a} \quad \Rightarrow \quad \hat{\varphi}_e(\omega_e) = \underbrace{\omega_0^2 \hat{\alpha}_e}_{\frac{M_e}{J}} \frac{1}{2\delta\omega_0}
+        \end{align}
+
+        Gesucht ist nun die maximale Auslenkung:
+        \begin{align}
+            \hat{\varphi}_e(\omega_R) \rightarrow \partial_{\omega_R} \hat{\varphi}_e = 0\nonumber
+        \end{align}
+
+        mit
+        \begin{align}
+            \omega_R = \sqrt{\omega_0^2 - 2\delta^2}\label{eq:1.14}
+        \end{align}
+
+        ist
+        \begin{align}
+            \hat{\varphi}_e(\omega_R) = \omega_0^2 \hat{\alpha}\left(2\delta\sqrt{\omega_0^2 - 2\delta^2}\right)^{-1}\label{eq:1.14a}
+        \end{align}
+
+        Amplitude nach \cref{eq:1.11a} wird maximal, wenn \(f(\omega_e)\) minimal wird
+        \begin{align}
+            \hat{\varphi}_e(\omega_e) = \frac{\hat{M}_e}{J} \frac{1}{\underbrace{\sqrt{(\omega_0^2 - \omega_e^2)^2+(2\delta\omega_e)^2}}_{f(\omega_e)}} \quad \Rightarrow \partial_{\omega_e} f(\omega_e) \overset{!}{=} 0\nonumber
+        \end{align}
+
+        Dies wird zu
+        \begin{align}
+            \hat{\varphi}(\omega_e) = \omega_0^2 \hat{\alpha} \frac{1}{2\delta\sqrt{\omega_0^2-\delta^2}}\nonumber
+        \end{align}
+
+        Mit Phasenverschiebung
+        \begin{align}
+            \xi(\omega_e \approx \omega_0) = \arctan\left(\frac{1}{0}\right) \rightarrow \frac{\pi}{2}\nonumber
+        \end{align}
+
+    \section{Gekoppelte harmonische Schwingung}
+
+        Bewegungsgleichungen:
+        \begin{align}
+            \ddot{\varphi}_1 + \frac{b^\ast}{J}\dot{\varphi}_1 + \frac{D^\ast}{J}\varphi_1 + \frac{D^{\ast\ast}}{J}(\varphi_1 - \varphi_2) &= \hat{M}_e\sin(\omega_e t)\label{eq:1.22a}\\
+            \ddot{\varphi}_2 + \frac{b^\ast}{J}\dot{\varphi}_2 + \frac{D^\ast}{J}\varphi_2 + \frac{D^{\ast\ast}}{J}(\varphi_2 - \varphi_1) &= 0\label{eq:1.22b}
+        \end{align}
+
+        Anfangsbedingungen:
+        \begin{align}
+            \varphi_1(0) &= \varphi_{10},& \qquad \varphi_2(0) &= \varphi_{20}\\
+            \dot{\varphi}_1(0) &= \dot{\varphi}_{10},& \qquad \dot{\varphi}_2(0) &= \dot{\varphi}_{20}
+        \end{align}
+
+        \subsection{Freie Schwingung}
+
+            \begin{align}
+                \ddot{\varphi}_1 + \frac{b^\ast}{J}\dot{\varphi}_1 + \frac{D^\ast}{J}\varphi_1 + \frac{D^{\ast\ast}}{J}(\varphi_1 - \varphi_2) = 0\label{eq:1.24a}\\
+                \ddot{\varphi}_2 + \frac{b^\ast}{J}\dot{\varphi}_2 + \frac{D^\ast}{J}\varphi_2 + \frac{D^{\ast\ast}}{J}(\varphi_2 - \varphi_1) = 0\label{eq:1.24b}
+            \end{align}
+
+            Gesucht ist eine Koordinatentransformation von \(\varphi_{1,2} \rightarrow u_{a,b}\):\par\medskip
+
+            \Cref{eq:1.24a} plus \cref{eq:1.24b} liefert
+            \begin{align}
+                \frac{d^2}{dt^2} \underbrace{(\varphi_1 + \varphi_2)}_{u_a} + \overbrace{\frac{b^\ast}{J}}^{2\delta} \frac{d}{dt} \underbrace{(\varphi_1 + \varphi_2)}_{u_a} + \overbrace{\frac{D^\ast}{J}}^{\omega_a^2} \underbrace{(\varphi_1 + \varphi_2)}_{u_a} = 0\label{eq:1.25}
+            \end{align}
+
+            und \cref{eq:1.24a} minus \cref{eq:1.24b} liefert
+            \begin{align}
+                \frac{d^2}{dt^2} \underbrace{(\varphi_1 - \varphi_2)}_{u_b} + \overbrace{\frac{b^\ast}{J}}^{2\delta} \frac{d}{dt} \underbrace{(\varphi_1 - \varphi_2)}_{u_b} + \frac{D^\ast}{J}\underbrace{(\varphi_1 - \varphi_2)}_{u_b} + \frac{D^{\ast\ast}}{J}2\underbrace{(\varphi_1 - \varphi_2)}_{u_b} = 0\label{eq:1.26}
+            \end{align}
+
+            mit \(\omega_b^2 = \frac{D^\ast + D^{\ast\ast}}{J}\)
+
+            \begin{align}
+                \ddot{u}_a + 2\delta\dot{u}_a + \omega_a^2 u_a &= 0\label{eq:1.25a}\\
+                \ddot{u}_b + 2\delta\dot{u}_b + \omega_b^2 u_b &= 0\label{eq:1.25b}
+            \end{align}
+
+            Für \(\delta = 0\) und \(\dot{u}_{a,0} = \dot{u}_{b,0} = 0\):
+
+            \begin{align}
+                u_a(t) = u_{a,0}\cos(\omega_a t)\label{eq:1.27a}\\
+                u_b(t) = u_{b,0}\cos(\omega_b t)\label{eq:1.27b}
+            \end{align}
+
+            \begin{align}
+                \Rightarrow \varphi_1(t) &= \frac{1}{2}(u_a + u_b) = \frac{1}{2}(\varphi_{10} + \varphi_{20})\cos(\omega_a t) + \frac{1}{2}(\varphi_{10} - \varphi_{20})\cos(\omega_b t)\label{eq:1.28a}\\
+                \Rightarrow \varphi_2(t) &= \frac{1}{2}(u_a - u_b) = \frac{1}{2}(\varphi_{10} + \varphi_{20})\cos(\omega_a t) - \frac{1}{2}(\varphi_{10} - \varphi_{20})\cos(\omega_b t)\label{eq:1.28b}
+            \end{align}
+
+                Für \(\varphi_{10} = \varphi_{20}\) gilt symmetrische Normalschwingung
+                \begin{align}
+                    \varphi_1(t) = \varphi_2(t) = \varphi_{10}\cos(\omega_a t)
+                \end{align}
+
+                Für \(\varphi_{10} = -\varphi_{20}\) gilt asymmetrische Normalschwingung:
+                \begin{align}
+                    \varphi_1(t) = \varphi_{10}\cos(\omega_b t)\\
+                    \varphi_2(t) = -\varphi_{10}\cos(\omega_b t)
+                \end{align}
+
+                In allen anderen Fällen werden beide Normalschwingungen angeregt. Für \(\varphi_{10}\neq 0 \)und \(\varphi_{20} = 0 \) entstehen Schwebungen. Dann ergibt sich:
+
+            \begin{align}
+                \varphi_1(t)=\varphi_{10}\cos\left(\frac{\Delta \omega }{2} t\right) \cos( \overline{\omega}t)\label{eq:1.30a}\\
+                \varphi_2(t)=\varphi_{10}\sin\left(\frac{\Delta \omega }{2} t\right) \sin( \overline{\omega}t)\label{eq:1.30b}
+            \end{align}
+
+        \subsection{Zusatzmasse an Rad 1}
+            In diesem Spezialfall wird eine Zusatmasse an dem Rad 1 angebracht um das Verhaltenn mit Unwucht zu untersuchen.
+            Die Bewegungsgleichung erweitert sich zu
+            
+            \begin{align}
+                \ddot{\varphi_1}+\frac{b^\ast}{J}\dot{\varphi_1}+\frac{D^\ast}{J}\varphi_1+\frac{D^{\ast\ast}}{J}(\varphi_1-\varphi_2)-\frac{m_z \cdot g \cdot r_z \cdot sin(\varphi_1)}{j}=0 
+            \end{align}

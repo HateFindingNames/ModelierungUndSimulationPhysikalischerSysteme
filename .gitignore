@@ -3,3 +3,9 @@ klausur*
 MphS*
 Termin*
 Loesung*
+*.pdf_tex
+Simulationsaufgabe/Bericht/buildfiles
+Simulationsaufgabe/Bericht/svg-inkscape
+Simulationsaufgabe/Bericht/AD
+*synctex*
+*svg-tex.pdf
